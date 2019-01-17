@@ -1,9 +1,10 @@
-import phones from './../../phones/phones.js';
-import PageItem from './phones-page-item.js';
+import phones from '../../../phones/phones.js';
+import PageItem from './phones-catalog-item.js';
+import Component from './../component.js';
 
-export default class PhonesCatalog {
+export default class PhonesCatalog extends Component {
     constructor(options) {
-        this.$elem = options.elem;
+        super(options);
         this._render(phones);
         this.$elem.addEventListener('click', ev => this._onPhoneClick(ev));
     }
@@ -31,22 +32,26 @@ export default class PhonesCatalog {
         console.log($target,$element);
         const phoneId = $element.getAttribute('data-phone-id');
 
-        alert((phoneId));
+        this._openPhonePage({container: this.$elem.querySelector()})
 
 
     }
 
-    _sortByAlphabet() {
-        let nameSortedPhones = phones.sort((a, b) => {
-            let nameA = a.name.toLowerCase();
-            let nameB = b.name.toLowerCase();
+    _sortCatalog(sortType) {
+        const sortedCatalog = phones.sort((phone1, phone2) => {
+            let item1 = phone1[sortType];
+            let item2 = phone2[sortType];
 
-            if (nameA > nameB) return 1;
-            if (nameA < nameB) return -1;
+            if (item1 > item2) return 1;
+            if (item1 < item2) return -1;
 
             return 0;
         });
+        this._render(sortedCatalog)
+    }
 
-        this._render(nameSortedPhones);
+    _openPhonePage(options) {
+        const $container = options.container;
+        const id = options.id;
     }
 }
