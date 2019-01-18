@@ -13,6 +13,12 @@ export default class Sidebar extends Component{
         this._createShoppingCart();
     }
 
+    init(options) {
+        this._initSearch(options);
+        this._initSortPhonesSelector(options);
+        this._initSoppingCart(options);
+    }
+
     _render() {
         this.$elem.innerHTML = `<section>
           <p data-sidebar-search></p>
@@ -36,6 +42,14 @@ export default class Sidebar extends Component{
     }
 
     _initSortPhonesSelector(options) {
-        this._sort._init(options);
+        this._sort.init(options);
+    }
+
+    _initSearch(options) {
+        this._search.init(options);
+    }
+
+    _initSoppingCart(options) {
+        this._shoppingCart.init(options);
     }
 }

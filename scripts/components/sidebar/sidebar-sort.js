@@ -1,5 +1,6 @@
 import Component from './../component.js';
 
+
 export default class SortPhones extends Component {
     constructor(options) {
         super(options);
@@ -14,17 +15,30 @@ export default class SortPhones extends Component {
             </select>`;
     }
 
-    _init(options) {
+    init(options) {
         const sidebarSortSelector = this.$elem.querySelector('select');
         const catalog = options.catalog;
 
         sidebarSortSelector.addEventListener('change', function () {
+            function sortPhones(sortType) {
+                const sortedPhones = catalog.phones.sort((phone1, phone2) => {
+                    let item1 = phone1[sortType];
+                    let item2 = phone2[sortType];
+
+                    if (item1 > item2) return 1;
+                    if (item1 < item2) return -1;
+
+                    return 0;
+                });
+                catalog.renderSortedCatalog(sortedPhones);
+            }
+
             switch (this.value) {
                 case 'age':
-                    catalog._sortCatalog(this.value);
+                    sortPhones(this.value);
                     break;
                 case 'name':
-                    catalog._sortCatalog(this.value);
+                    sortPhones(this.value);
                     break;
             }
         });

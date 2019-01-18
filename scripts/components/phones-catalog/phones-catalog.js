@@ -1,11 +1,13 @@
 import phones from '../../../phones/phones.js';
-import PageItem from './phones-catalog-item.js';
+import PageItem from './services/phones-catalog-item.js';
 import Component from './../component.js';
+import PhonePage from './services/phone-page.js';
 
 export default class PhonesCatalog extends Component {
     constructor(options) {
         super(options);
-        this._render(phones);
+        this.phones = phones;
+        this._render(this.phones);
         this.$elem.addEventListener('click', ev => this._onPhoneClick(ev));
     }
 
@@ -29,29 +31,33 @@ export default class PhonesCatalog extends Component {
         }
 
         const $element = $target.closest('[data-phone]');
-        console.log($target,$element);
         const phoneId = $element.getAttribute('data-phone-id');
-
-        this._openPhonePage({container: this.$elem.querySelector()})
+        console.log(document.querySelector('[data-page-phone]'));
+        this._openPhonePage({container: document.querySelector('[data-page-phone]'), id: phoneId});
 
 
     }
 
-    _sortCatalog(sortType) {
-        const sortedCatalog = phones.sort((phone1, phone2) => {
-            let item1 = phone1[sortType];
-            let item2 = phone2[sortType];
-
-            if (item1 > item2) return 1;
-            if (item1 < item2) return -1;
-
-            return 0;
-        });
-        this._render(sortedCatalog)
+    renderSortedCatalog(sortedPhones) {
+        this._render(sortedPhones)
     }
 
     _openPhonePage(options) {
         const $container = options.container;
         const id = options.id;
+        this.hide();
+        new PhonePage(options);
+    }
+
+    renderFilteredCatalog(filteredPhones) {
+        this._render(filteredPhones);
+    }
+
+    hide() {
+        this.$elem.classList.add('hidden');
+    }
+
+    show() {
+        this.$elem.classList.remove('hidden');
     }
 }
