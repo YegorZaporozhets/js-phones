@@ -22,7 +22,8 @@ export default class Search extends Component {
                return phoneName.indexOf(serachValue) + 1;
            });
 
-           catalog.renderFilteredCatalog(filteredPhones);
+           catalog.renderSortedFilteredCatalog(filteredPhones);
+           catalog.renderedPhones = filteredPhones;
         });
     }
 

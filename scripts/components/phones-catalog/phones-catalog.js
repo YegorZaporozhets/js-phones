@@ -20,6 +20,7 @@ export default class PhonesCatalog extends Component {
         </ul>`;
 
         this.$elem.innerHTML = inner;
+        this.renderedPhones = phonesToRender;
     }
 
     _onPhoneClick (ev) {
@@ -38,8 +39,8 @@ export default class PhonesCatalog extends Component {
 
     }
 
-    renderSortedCatalog(sortedPhones) {
-        this._render(sortedPhones)
+    renderSortedFilteredCatalog(phonesToRender) {
+        this._render(phonesToRender)
     }
 
     _openPhonePage(options) {
@@ -47,10 +48,6 @@ export default class PhonesCatalog extends Component {
         const id = options.id;
         this.hide();
         new PhonePage(options);
-    }
-
-    renderFilteredCatalog(filteredPhones) {
-        this._render(filteredPhones);
     }
 
     hide() {
