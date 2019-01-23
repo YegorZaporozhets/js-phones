@@ -1,7 +1,7 @@
 import phones from '../../../phones/phones.js';
 import PageItem from './services/phones-catalog-item.js';
 import Component from './../component.js';
-import PhonePage from './services/phone-page.js';
+import PhonePage from './phone-page/phone-page.js';
 
 export default class PhonesCatalog extends Component {
     constructor(options) {
@@ -33,8 +33,7 @@ export default class PhonesCatalog extends Component {
 
         const $element = $target.closest('[data-phone]');
         const phoneId = $element.getAttribute('data-phone-id');
-        console.log(document.querySelector('[data-page-phone]'));
-        this._openPhonePage({container: document.querySelector('[data-page-phone]'), id: phoneId});
+        this._openPhonePage({container: document.querySelector('[data-page-phone]'), id: phoneId, catalog: this});
 
 
     }
@@ -44,8 +43,6 @@ export default class PhonesCatalog extends Component {
     }
 
     _openPhonePage(options) {
-        const $container = options.container;
-        const id = options.id;
         this.hide();
         new PhonePage(options);
     }

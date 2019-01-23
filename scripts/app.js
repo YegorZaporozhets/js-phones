@@ -30,7 +30,7 @@ export default class PhonesMarket extends Component {
       <!--Main content-->
       <div data-page-catalog class="col-md-10"></div>
       <!--Phone page-->
-      <div data-page-phone class="col-md-10"></div>
+      <div data-page-phone class="col-md-10 hidden"></div>
     </div>`;
     }
 }
