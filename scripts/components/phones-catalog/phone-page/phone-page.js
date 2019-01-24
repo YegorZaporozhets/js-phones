@@ -16,8 +16,8 @@ export default class PhonePage {
 
     <img data-phone-current-img class="phone" src=${phone.images[0]}>
 
-    <button data-back >Back</button>
-    <button data-add >Add to basket</button>
+    <button data-btn-back >Back</button>
+    <button data-btn-add >Add to basket</button>
 
 
     <h1>${phone.name}</h1>
@@ -138,11 +138,18 @@ export default class PhonePage {
 
         this.show();
 
-        const $backBut = this.$container.querySelector('[data-back]');
-        $backBut.addEventListener('click', () => {
+        const $backBtn = this.$container.querySelector('[data-btn-back]');
+
+        $backBtn.addEventListener('click', () => {
            this.hide();
            this.catalog.show();
         });
+
+        const $addBtn = this.$container.querySelector('[data-btn-add]');
+
+        $addBtn.addEventListener('click', () => {
+            this.catalog.sidebar._shoppingCart.addPhoneInSC(this._id);
+        })
     }
 
     hide() {

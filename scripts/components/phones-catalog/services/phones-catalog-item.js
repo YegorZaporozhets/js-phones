@@ -9,7 +9,7 @@ export default class PageItem {
               <img alt="${this._phone.name}" src="${this._phone.imageUrl}">
             </a>
 
-            <div class="phones__btn-buy-wrapper">
+            <div data-add class="phones__btn-buy-wrapper">
               <a class="btn btn-success">
                 Add
               </a>

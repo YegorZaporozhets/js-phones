@@ -109,3 +109,7 @@ h1 {
 .hidden {
   display: none;
 }
+
+.sc-item-delete {
+  cursor: pointer;
+}

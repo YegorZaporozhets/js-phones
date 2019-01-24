@@ -8,7 +8,6 @@ export default class PhonesCatalog extends Component {
         super(options);
         this.phones = phones;
         this._render(this.phones);
-        this.$elem.addEventListener('click', ev => this._onPhoneClick(ev));
     }
 
     _render(phonesToRender) {
@@ -21,6 +20,12 @@ export default class PhonesCatalog extends Component {
 
         this.$elem.innerHTML = inner;
         this.renderedPhones = phonesToRender;
+    }
+
+    init(options) {
+        this.sidebar = options.sidebar;
+        this.$elem.addEventListener('click', ev => this._onPhoneClick(ev));
+        this.$elem.addEventListener('click', ev => this.addPhoneInSC(ev));
     }
 
     _onPhoneClick (ev) {
@@ -53,5 +58,14 @@ export default class PhonesCatalog extends Component {
 
     show() {
         this.$elem.classList.remove('hidden');
+    }
+
+    addPhoneInSC(ev) {
+        let $target = ev.target.closest('[data-add]');
+
+        if ($target) {
+            let id = $target.closest('[data-phone-id]').getAttribute('data-phone-id');
+            this.sidebar._shoppingCart.addPhoneInSC(id);
+        }
     }
 }

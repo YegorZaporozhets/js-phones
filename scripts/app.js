@@ -9,6 +9,7 @@ export default class PhonesMarket extends Component {
         this._createPhonesCatalog();
         this._createSidebar();
         this._initSidebar();
+        this._initCatalog();
     }
 
     _createPhonesCatalog() {
@@ -21,6 +22,10 @@ export default class PhonesMarket extends Component {
 
     _initSidebar() {
         this._sidebar.init({catalog: this._catalog});
+    }
+
+    _initCatalog() {
+        this._catalog.init({sidebar: this._sidebar});
     }
 
     _createMarkup() {
